@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Cancel superseded runs on the same branch/PR
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Build uses JDK 21 (bytecode targets Java 17 via options.release)
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      # Caches Gradle deps and validates the wrapper jar checksum
+      - uses: gradle/actions/setup-gradle@v4
+
+      # `check` runs spotlessCheck, checkstyleMain/Test, and test
+      - name: Lint and test
+        run: ./gradlew check --console=plain
