@@ -19,6 +19,8 @@ Use `./gradlew` in bash/WSL and `.\gradlew.bat` in PowerShell.
 
 CI (`.github/workflows/ci.yml`) runs `./gradlew check` on JDK 21 for every PR and push to `main`.
 
+`main` is protected by a GitHub ruleset ("Protect main"; lives on GitHub, not in this repo): no direct or force pushes, PRs required (0 approvals), unresolved review threads block merge, and the `check` job must pass on a branch that's up to date with `main`. Merged branches are auto-deleted on GitHub; run `git fetch --prune` locally. If the `check` job in `ci.yml` is renamed, update the ruleset too or merges stay blocked. Inspect the active rules with `gh api repos/montal95/soloro/rules/branches/main`.
+
 ## Architecture
 
 - `core/` holds all game code and all tests. It depends only on `gdx`, never on a backend, so it stays portable to Android.
