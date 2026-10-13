@@ -20,10 +20,14 @@ assets/   art, maps, and data shared by every platform
 ```bash
 ./gradlew lwjgl3:run   # launch the desktop build
 ./gradlew test         # run unit tests
-./gradlew build        # compile + test everything
+./gradlew build        # compile + test + lint everything
+./gradlew spotlessApply   # auto-format (google-java-format, AOSP 4-space style)
+./gradlew check           # tests + Spotless + Checkstyle, without packaging
 ```
+
+Formatting is owned by Spotless; Checkstyle (`config/checkstyle/checkstyle.xml`) covers naming, imports, and bug-prone patterns only, so the two never disagree.
 
 ## TODO
 
 - [ ] Add android module (needs Android SDK / Android Studio)
-- [ ] Choose a linter/formatter (Spotless + google-java-format or Checkstyle)
+- [x] Linter/formatter: Spotless + google-java-format (AOSP) and Checkstyle

@@ -18,7 +18,8 @@ public class TitleScreen extends ScreenAdapter {
     public TitleScreen(SoloroGame game) {
         this.game = game;
         this.viewport = new FitViewport(SoloroGame.VIRTUAL_WIDTH, SoloroGame.VIRTUAL_HEIGHT);
-        this.font = new BitmapFont(); // libGDX's built-in default font; replaced once we have real assets
+        // libGDX's built-in default font; replaced once we have real assets
+        this.font = new BitmapFont();
     }
 
     @Override
