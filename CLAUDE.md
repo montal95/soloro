@@ -41,3 +41,17 @@ CI (`.github/workflows/ci.yml`) runs `./gradlew check` on JDK 21 for every PR an
 
 - `gradlew` must stay executable in git (`100755`). Windows doesn't track the bit; if it's lost, restore it with `git update-index --chmod=+x gradlew`, or CI fails with "Permission denied".
 - Windows PowerShell 5.1 mangles embedded double quotes in native-command arguments. For multi-line commit messages, write the message to a file and use `git commit -F <file>`.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs live in GitHub Issues for `montal95/soloro` (via `gh`). See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default five-role vocabulary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one `CONTEXT.md` plus `docs/adr/` at the repo root. See `docs/agents/domain.md`.
