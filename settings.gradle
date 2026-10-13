@@ -1,0 +1,4 @@
+rootProject.name = 'soloro'
+
+// android is added once the Android SDK is installed
+include 'core', 'lwjgl3'

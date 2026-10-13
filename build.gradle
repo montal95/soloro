@@ -1,0 +1,19 @@
+allprojects {
+    group = 'com.sammontalvo.soloro'
+    version = '0.1.0'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java-library'
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+        // Compile with JDK 21, but target Java 17 so core stays compatible
+        // with Android's desugaring when the android module is added.
+        options.release = 17
+    }
+}
