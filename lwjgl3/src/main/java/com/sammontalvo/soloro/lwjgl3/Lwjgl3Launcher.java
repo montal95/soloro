@@ -4,8 +4,13 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.sammontalvo.soloro.SoloroGame;
 
-/** Desktop launcher. Used for fast iteration during development; Android gets its own launcher later. */
-public class Lwjgl3Launcher {
+/**
+ * Desktop launcher. Used for fast iteration during development; Android gets its own launcher
+ * later.
+ */
+public final class Lwjgl3Launcher {
+    private Lwjgl3Launcher() {}
+
     public static void main(String[] args) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setTitle(SoloroGame.TITLE);

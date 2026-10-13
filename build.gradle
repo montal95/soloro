@@ -1,3 +1,8 @@
+plugins {
+    id 'base'
+    id 'com.diffplug.spotless' version '8.10.3'
+}
+
 allprojects {
     group = 'com.sammontalvo.soloro'
     version = '0.1.0'
@@ -7,13 +12,40 @@ allprojects {
     }
 }
 
+// Non-Java files at the root: whitespace hygiene only
+spotless {
+    format 'misc', {
+        target '*.gradle', '*/*.gradle', '*.md', '*.properties', '.gitignore', '.gitattributes', '.editorconfig'
+        trimTrailingWhitespace()
+        leadingTabsToSpaces(4)
+        endWithNewline()
+    }
+}
+
 subprojects {
     apply plugin: 'java-library'
+    apply plugin: 'com.diffplug.spotless'
+    apply plugin: 'checkstyle'
 
     tasks.withType(JavaCompile).configureEach {
         options.encoding = 'UTF-8'
         // Compile with JDK 21, but target Java 17 so core stays compatible
         // with Android's desugaring when the android module is added.
         options.release = 17
+    }
+
+    // Spotless owns formatting; AOSP style = google-java-format with 4-space indents
+    spotless {
+        java {
+            target 'src/**/*.java'
+            googleJavaFormat(googleJavaFormatVersion).aosp().reflowLongStrings()
+        }
+    }
+
+    // Checkstyle owns everything else (naming, imports, bug-prone patterns)
+    checkstyle {
+        toolVersion = checkstyleVersion
+        configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+        maxWarnings = 0
     }
 }

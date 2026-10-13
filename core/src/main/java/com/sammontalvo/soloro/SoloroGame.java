@@ -8,8 +8,11 @@ import com.sammontalvo.soloro.screens.TitleScreen;
 public class SoloroGame extends Game {
     public static final String TITLE = "Soloro";
 
-    /** Low-res virtual resolution; the viewport scales it up to the window for a crisp pixel look. */
+    /**
+     * Low-res virtual resolution; the viewport scales it up to the window for a crisp pixel look.
+     */
     public static final int VIRTUAL_WIDTH = 480;
+
     public static final int VIRTUAL_HEIGHT = 270;
 
     public SpriteBatch batch;
